@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.fisherman.ui.theme.components.ComponentViewModel
 import com.example.fisherman.ui.theme.components.FMScreen
@@ -23,14 +24,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FishermanTheme {
-                /*
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }*/
-                FMScreen(viewModel = ComponentViewModel())
+                val context = LocalContext.current
+                FMScreen(viewModel = ComponentViewModel(context))
             }
         }
     }
