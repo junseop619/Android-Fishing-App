@@ -47,14 +47,10 @@ fun FMScreen(
         // 권한 요청 이벤트 관찰
         val requestImagePermissionEvent = viewModel.imagePermissionEvent.collectAsState().value
         val requestMessagePermissionEvent = viewModel.imagePermissionEvent.collectAsState().value
-        LaunchedEffect(requestImagePermissionEvent, requestMessagePermissionEvent) {
+
+        LaunchedEffect(requestImagePermissionEvent) {
             if (requestImagePermissionEvent != null) { // null이 아닌 경우에만 실행
                 permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                viewModel.resetImagePermissionEvent() // 이벤트를 초기화
-            }
-
-            if (requestMessagePermissionEvent != null) { // null이 아닌 경우에만 실행
-                permissionLauncher.launch(android.Manifest.permission.READ_SMS)
                 viewModel.resetImagePermissionEvent() // 이벤트를 초기화
             }
         }
